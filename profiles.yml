@@ -1,0 +1,29 @@
+# dbt profiles configuration for Google Cloud BigQuery
+# Place this file in ~/.dbt/profiles.yml or in your project root
+
+my_project:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: healthcare-analytics-dbt # Replace with your actual GCP project ID
+      dataset: healthcare_data_dev # Development dataset
+      keyfile: /Users/nezamsp8/Developer/python/dataEngineeringPractice/dbt-service-account-key.json # Path to your service account key
+      location: US # or your preferred BigQuery location
+      priority: interactive
+      threads: 4
+      timeout_seconds: 300
+      retries: 1
+
+    prod:
+      type: bigquery
+      method: service-account
+      project: healthcare-analytics-dbt # Replace with your actual GCP project ID
+      dataset: healthcare_data_prod # Production dataset
+      keyfile: /Users/nezamsp8/Developer/python/dataEngineeringPractice/dbt-service-account-key.json # Path to your service account key
+      location: US
+      priority: interactive
+      threads: 8
+      timeout_seconds: 300
+      retries: 1

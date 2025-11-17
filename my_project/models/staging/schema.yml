@@ -1,0 +1,183 @@
+version: 2
+
+models:
+  - name: stg_patients
+    description: "Cleaned and standardized patient data"
+    columns:
+      - name: patient_id
+        description: "Unique identifier for each patient"
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: "Patient's first name (standardized)"
+      - name: last_name
+        description: "Patient's last name (standardized)"
+      - name: date_of_birth
+        description: "Patient's date of birth"
+      - name: age
+        description: "Calculated age in years"
+      - name: age_group
+        description: "Age group classification (Pediatric, Adult, Senior)"
+      - name: email
+        description: "Patient's email address (standardized)"
+      - name: phone
+        description: "Patient's phone number"
+      - name: address
+        description: "Patient's street address"
+      - name: city
+        description: "Patient's city"
+      - name: state
+        description: "Patient's state"
+      - name: zip_code
+        description: "Patient's ZIP code"
+      - name: gender
+        description: "Patient's gender"
+      - name: blood_type
+        description: "Patient's blood type"
+      - name: insurance_provider
+        description: "Patient's insurance provider"
+      - name: emergency_contact_name
+        description: "Emergency contact's name"
+      - name: emergency_contact_phone
+        description: "Emergency contact's phone number"
+      - name: has_valid_email
+        description: "Boolean flag indicating if email is valid"
+      - name: has_valid_phone
+        description: "Boolean flag indicating if phone is valid"
+      - name: created_date
+        description: "Timestamp when record was created"
+      - name: updated_date
+        description: "Timestamp when record was last updated"
+
+  - name: stg_visits
+    description: "Cleaned and standardized visit data"
+    columns:
+      - name: visit_id
+        description: "Unique identifier for each visit"
+        tests:
+          - unique
+          - not_null
+      - name: patient_id
+        description: "Foreign key to patients table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_patients')
+              field: patient_id
+      - name: visit_date
+        description: "Date of the visit"
+      - name: visit_time
+        description: "Time of the visit"
+      - name: visit_datetime
+        description: "Combined date and time of the visit"
+      - name: department
+        description: "Medical department where visit occurred"
+      - name: doctor_name
+        description: "Name of the attending physician"
+      - name: doctor_specialty
+        description: "Specialty of the attending physician"
+      - name: visit_type
+        description: "Type of visit (Routine, Emergency, etc.)"
+      - name: care_category
+        description: "Care category classification"
+      - name: chief_complaint
+        description: "Primary reason for the visit"
+      - name: diagnosis
+        description: "Primary diagnosis"
+      - name: diagnosis_code
+        description: "ICD-10 diagnosis code"
+      - name: treatment_plan
+        description: "Recommended treatment plan"
+      - name: duration_minutes
+        description: "Duration of the visit in minutes"
+      - name: visit_length_category
+        description: "Visit length classification"
+      - name: visit_cost
+        description: "Total cost of the visit"
+      - name: insurance_coverage
+        description: "Amount covered by insurance"
+      - name: patient_payment
+        description: "Amount paid by patient"
+      - name: visit_status
+        description: "Status of the visit"
+      - name: follow_up_required
+        description: "Whether follow-up is required"
+      - name: follow_up_date
+        description: "Scheduled follow-up date"
+      - name: has_insurance_coverage
+        description: "Boolean flag indicating if visit has insurance coverage"
+      - name: has_scheduled_followup
+        description: "Boolean flag indicating if follow-up is scheduled"
+      - name: created_date
+        description: "Timestamp when record was created"
+      - name: updated_date
+        description: "Timestamp when record was last updated"
+
+  - name: stg_lab_results
+    description: "Cleaned and standardized laboratory results"
+    columns:
+      - name: lab_result_id
+        description: "Unique identifier for each lab result"
+        tests:
+          - unique
+          - not_null
+      - name: patient_id
+        description: "Foreign key to patients table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_patients')
+              field: patient_id
+      - name: visit_id
+        description: "Foreign key to visits table"
+        tests:
+          - relationships:
+              to: ref('stg_visits')
+              field: visit_id
+      - name: test_name
+        description: "Name of the laboratory test"
+      - name: test_type
+        description: "Type of test (Numeric, Text, etc.)"
+      - name: test_category
+        description: "Category of the test"
+      - name: test_date
+        description: "Date the test was performed"
+      - name: test_time
+        description: "Time the test was performed"
+      - name: test_datetime
+        description: "Combined date and time of the test"
+      - name: result_value
+        description: "The test result value"
+      - name: result_unit
+        description: "Unit of measurement for the result"
+      - name: reference_range_min
+        description: "Minimum normal value"
+      - name: reference_range_max
+        description: "Maximum normal value"
+      - name: numeric_result_value
+        description: "Numeric representation of the result value"
+      - name: is_abnormal
+        description: "Boolean flag indicating if result is abnormal"
+      - name: result_interpretation
+        description: "Clinical interpretation of the result"
+      - name: result_category
+        description: "Categorized interpretation (High, Low, Normal, Unknown)"
+      - name: lab_name
+        description: "Name of the laboratory"
+      - name: lab_location
+        description: "Location of the laboratory"
+      - name: technician_name
+        description: "Name of the lab technician"
+      - name: quality_control_passed
+        description: "Whether quality control passed"
+      - name: retest_required
+        description: "Whether retest is required"
+      - name: result_status
+        description: "Overall result status (Abnormal, Normal, Unknown)"
+      - name: days_since_test
+        description: "Number of days since the test was performed"
+      - name: created_date
+        description: "Timestamp when record was created"
+      - name: updated_date
+        description: "Timestamp when record was last updated"

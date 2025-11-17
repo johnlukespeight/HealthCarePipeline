@@ -1,0 +1,70 @@
+# Healthcare Data Pipeline Project
+# This project processes healthcare data from CSV sources and creates analytics-ready models
+name: "healthcare_pipeline"
+version: "1.0.0"
+
+# This setting configures which "profile" dbt uses for this project.
+profile: "my_project"
+
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets: # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+# In this example config, we tell dbt to build all models in the example/
+# directory as views. These settings can be overridden in the individual model
+# files using the `{{ config(...) }}` macro.
+models:
+  healthcare_pipeline:
+    # Staging models - cleaned and standardized data
+    staging:
+      +materialized: table
+      +partition_by:
+        field: "created_date"
+        data_type: "date"
+      +cluster_by: ["patient_id"]
+
+    # Mart models - business logic and aggregations
+    marts:
+      +materialized: table
+      +partition_by:
+        field: "created_date"
+        data_type: "date"
+
+    # Example models (legacy)
+    example:
+      +materialized: view
+
+# Seeds configuration
+seeds:
+  healthcare_pipeline:
+    +quote_columns: true
+    visits:
+      +column_types:
+        patient_id: STRING
+        visit_id: STRING
+        visit_cost: FLOAT64
+        insurance_coverage: FLOAT64
+        patient_payment: FLOAT64
+    lab_results:
+      +column_types:
+        patient_id: STRING
+        visit_id: STRING
+        lab_result_id: STRING
+        reference_range_min: FLOAT64
+        reference_range_max: FLOAT64
+    patients:
+      +column_types:
+        patient_id: STRING

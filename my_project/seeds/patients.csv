@@ -1,0 +1,6 @@
+patient_id,first_name,last_name,date_of_birth,email,phone,address,city,state,zip_code,gender,blood_type,insurance_provider,emergency_contact_name,emergency_contact_phone
+P001,John,Doe,1985-03-15,john.doe@email.com,555-0101,123 Main St,New York,NY,10001,Male,O+,Blue Cross,Jane Doe,555-0102
+P002,Jane,Smith,1990-07-22,jane.smith@email.com,555-0201,456 Oak Ave,Los Angeles,CA,90210,Female,A+,Aetna,Bob Smith,555-0202
+P003,Mike,Johnson,1978-11-08,mike.j@email.com,555-0301,789 Pine St,Chicago,IL,60601,Male,B+,Cigna,Sarah Johnson,555-0302
+P004,Sarah,Williams,1995-01-30,sarah.w@email.com,555-0401,321 Elm St,Houston,TX,77001,Female,AB-,UnitedHealth,Tom Williams,555-0402
+P005,David,Brown,1982-09-12,david.brown@email.com,555-0501,654 Maple Dr,Phoenix,AZ,85001,Male,O-,Kaiser,Emily Brown,555-0502

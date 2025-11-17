@@ -1,0 +1,37 @@
+# Claude Code folder
+.claude/
+
+# Service account credentials
+dbt-service-account-key.json
+*-service-account-key.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+dbt_venv/
+venv/
+env/
+ENV/
+
+# dbt
+logs/
+target/
+dbt_packages/
+dbt_modules/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes

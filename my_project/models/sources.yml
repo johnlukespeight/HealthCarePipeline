@@ -1,0 +1,145 @@
+version: 2
+
+sources:
+  - name: healthcare
+    description: "Healthcare data from CSV files and external sources"
+    schema: healthcare_data_dev
+    tables:
+      - name: patients
+        description: "Patient demographic and contact information"
+        columns:
+          - name: patient_id
+            description: "Unique identifier for each patient"
+            tests:
+              - unique
+              - not_null
+          - name: first_name
+            description: "Patient's first name"
+          - name: last_name
+            description: "Patient's last name"
+          - name: date_of_birth
+            description: "Patient's date of birth"
+          - name: email
+            description: "Patient's email address"
+          - name: phone
+            description: "Patient's phone number"
+          - name: address
+            description: "Patient's street address"
+          - name: city
+            description: "Patient's city"
+          - name: state
+            description: "Patient's state"
+          - name: zip_code
+            description: "Patient's ZIP code"
+          - name: gender
+            description: "Patient's gender"
+          - name: blood_type
+            description: "Patient's blood type"
+          - name: insurance_provider
+            description: "Patient's insurance provider"
+          - name: emergency_contact_name
+            description: "Emergency contact's name"
+          - name: emergency_contact_phone
+            description: "Emergency contact's phone number"
+
+      - name: visits
+        description: "Patient visit records and clinical information"
+        columns:
+          - name: visit_id
+            description: "Unique identifier for each visit"
+            tests:
+              - unique
+              - not_null
+          - name: patient_id
+            description: "Foreign key to patients table"
+            tests:
+              - not_null
+              - relationships:
+                  to: source('healthcare', 'patients')
+                  field: patient_id
+          - name: visit_date
+            description: "Date of the visit"
+          - name: visit_time
+            description: "Time of the visit"
+          - name: department
+            description: "Medical department where visit occurred"
+          - name: doctor_name
+            description: "Name of the attending physician"
+          - name: doctor_specialty
+            description: "Specialty of the attending physician"
+          - name: visit_type
+            description: "Type of visit (Routine, Emergency, etc.)"
+          - name: chief_complaint
+            description: "Primary reason for the visit"
+          - name: diagnosis
+            description: "Primary diagnosis"
+          - name: diagnosis_code
+            description: "ICD-10 diagnosis code"
+          - name: treatment_plan
+            description: "Recommended treatment plan"
+          - name: duration_minutes
+            description: "Duration of the visit in minutes"
+          - name: visit_cost
+            description: "Total cost of the visit"
+          - name: insurance_coverage
+            description: "Amount covered by insurance"
+          - name: patient_payment
+            description: "Amount paid by patient"
+          - name: visit_status
+            description: "Status of the visit"
+          - name: follow_up_required
+            description: "Whether follow-up is required"
+          - name: follow_up_date
+            description: "Scheduled follow-up date"
+
+      - name: lab_results
+        description: "Laboratory test results and analysis"
+        columns:
+          - name: lab_result_id
+            description: "Unique identifier for each lab result"
+            tests:
+              - unique
+              - not_null
+          - name: patient_id
+            description: "Foreign key to patients table"
+            tests:
+              - not_null
+              - relationships:
+                  to: source('healthcare', 'patients')
+                  field: patient_id
+          - name: visit_id
+            description: "Foreign key to visits table"
+            tests:
+              - relationships:
+                  to: source('healthcare', 'visits')
+                  field: visit_id
+          - name: test_name
+            description: "Name of the laboratory test"
+          - name: test_type
+            description: "Type of test (Numeric, Text, etc.)"
+          - name: test_category
+            description: "Category of the test"
+          - name: test_date
+            description: "Date the test was performed"
+          - name: test_time
+            description: "Time the test was performed"
+          - name: result_value
+            description: "The test result value"
+          - name: result_unit
+            description: "Unit of measurement for the result"
+          - name: reference_range_min
+            description: "Minimum normal value"
+          - name: reference_range_max
+            description: "Maximum normal value"
+          - name: result_interpretation
+            description: "Clinical interpretation of the result"
+          - name: lab_name
+            description: "Name of the laboratory"
+          - name: lab_location
+            description: "Location of the laboratory"
+          - name: technician_name
+            description: "Name of the lab technician"
+          - name: quality_control_passed
+            description: "Whether quality control passed"
+          - name: retest_required
+            description: "Whether retest is required"

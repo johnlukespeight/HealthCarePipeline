@@ -1,0 +1,6 @@
+visit_id,patient_id,visit_date,visit_time,department,doctor_name,doctor_specialty,visit_type,chief_complaint,diagnosis,diagnosis_code,treatment_plan,duration_minutes,visit_cost,insurance_coverage,patient_payment,visit_status,follow_up_required,follow_up_date
+V001,P001,2024-01-15,09:30:00,Cardiology,Dr. Smith,Cardiologist,Routine,Chest pain,Hypertension,I10,Medication adjustment,45,250.00,200.00,50.00,Completed,true,2024-02-15
+V002,P002,2024-01-16,14:15:00,Emergency,Dr. Jones,Emergency Medicine,Emergency,Severe headache,Migraine,G43.9,Prescription and rest,60,500.00,400.00,100.00,Completed,false,
+V003,P003,2024-01-17,10:00:00,Orthopedics,Dr. Wilson,Orthopedic Surgeon,Follow-up,Post-surgery checkup,Healed fracture,S72.001A,Physical therapy,30,150.00,120.00,30.00,Completed,true,2024-02-17
+V004,P004,2024-01-18,11:30:00,Pediatrics,Dr. Davis,Pediatrician,Routine,Annual checkup,Healthy child,Z00.00,Vaccination schedule,25,100.00,80.00,20.00,Completed,true,2025-01-18
+V005,P005,2024-01-19,16:45:00,Internal Medicine,Dr. Miller,Internal Medicine,Urgent,Fever and cough,Upper respiratory infection,J06.9,Antibiotics and rest,40,200.00,160.00,40.00,Completed,false,

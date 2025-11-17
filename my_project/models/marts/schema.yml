@@ -1,0 +1,126 @@
+version: 2
+
+models:
+  - name: patient_summary
+    description: "Comprehensive patient summary with aggregated metrics"
+    columns:
+      - name: patient_id
+        description: "Unique identifier for each patient"
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: "Patient's first name"
+      - name: last_name
+        description: "Patient's last name"
+      - name: age
+        description: "Patient's current age"
+      - name: age_group
+        description: "Age group classification"
+      - name: gender
+        description: "Patient's gender"
+      - name: blood_type
+        description: "Patient's blood type"
+      - name: insurance_provider
+        description: "Patient's insurance provider"
+      - name: city
+        description: "Patient's city"
+      - name: state
+        description: "Patient's state"
+      - name: has_valid_email
+        description: "Whether patient has valid email"
+      - name: has_valid_phone
+        description: "Whether patient has valid phone"
+      - name: total_visits
+        description: "Total number of visits"
+      - name: unique_visit_days
+        description: "Number of unique days with visits"
+      - name: first_visit_date
+        description: "Date of first visit"
+      - name: last_visit_date
+        description: "Date of most recent visit"
+      - name: avg_visit_duration
+        description: "Average visit duration in minutes"
+      - name: total_visit_costs
+        description: "Total cost of all visits"
+      - name: total_insurance_coverage
+        description: "Total insurance coverage amount"
+      - name: emergency_visits
+        description: "Number of emergency visits"
+      - name: visits_requiring_followup
+        description: "Number of visits requiring follow-up"
+      - name: total_lab_tests
+        description: "Total number of lab tests"
+      - name: abnormal_results
+        description: "Number of abnormal lab results"
+      - name: high_results
+        description: "Number of high lab results"
+      - name: low_results
+        description: "Number of low lab results"
+      - name: last_lab_test_date
+        description: "Date of most recent lab test"
+      - name: unique_test_types
+        description: "Number of unique test types performed"
+      - name: utilization_category
+        description: "Patient utilization category (High, Moderate, Low, No Visits)"
+      - name: lab_status
+        description: "Lab results status (Has Abnormal, All Normal, No Lab Tests)"
+      - name: created_date
+        description: "Record creation timestamp"
+      - name: updated_date
+        description: "Record last update timestamp"
+
+  - name: department_metrics
+    description: "Department performance metrics and analytics"
+    columns:
+      - name: department
+        description: "Medical department name"
+        tests:
+          - unique
+          - not_null
+      - name: total_visits
+        description: "Total number of visits in department"
+      - name: unique_patients
+        description: "Number of unique patients seen"
+      - name: unique_doctors
+        description: "Number of unique doctors in department"
+      - name: avg_visit_duration
+        description: "Average visit duration in minutes"
+      - name: total_revenue
+        description: "Total revenue generated"
+      - name: total_insurance_payments
+        description: "Total insurance payments received"
+      - name: total_patient_payments
+        description: "Total patient payments received"
+      - name: emergency_visits
+        description: "Number of emergency visits"
+      - name: followup_visits
+        description: "Number of follow-up visits"
+      - name: completed_visits
+        description: "Number of completed visits"
+      - name: cancelled_visits
+        description: "Number of cancelled visits"
+      - name: total_lab_tests
+        description: "Total number of lab tests ordered"
+      - name: abnormal_tests
+        description: "Number of abnormal lab tests"
+      - name: unique_test_types
+        description: "Number of unique test types"
+      - name: avg_numeric_result
+        description: "Average numeric test result value"
+      - name: avg_revenue_per_visit
+        description: "Average revenue per visit"
+      - name: avg_visit_duration_hours
+        description: "Average visit duration in hours"
+      - name: emergency_visit_percentage
+        description: "Percentage of emergency visits"
+      - name: followup_visit_percentage
+        description: "Percentage of follow-up visits"
+      - name: completion_rate
+        description: "Visit completion rate percentage"
+      - name: efficiency_category
+        description: "Efficiency category (Efficient, Standard, Extended)"
+      - name: emergency_category
+        description: "Emergency visit category (High, Moderate, Low Emergency)"
+      - name: created_date
+        description: "Record creation timestamp"
