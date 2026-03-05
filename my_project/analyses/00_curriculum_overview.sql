@@ -1,0 +1,107 @@
+-- ============================================================
+-- SQL ANALYTICS INTERVIEW PREP — CURRICULUM OVERVIEW
+-- Based on the HealthCarePipeline dbt/BigQuery project
+-- ============================================================
+--
+-- This curriculum uses the actual tables in this repo as the
+-- context for every example. All queries run against:
+--
+--   patients       → demographics, insurance, contact info
+--   visits         → clinical visits, costs, diagnoses
+--   lab_results    → test results, abnormal flags
+--   stg_patients   → cleaned/enriched patient data (dbt staging)
+--   stg_visits     → cleaned visit data with computed fields
+--   stg_lab_results→ normalized lab results
+--
+-- ── MODULES ──────────────────────────────────────────────────
+--
+--  01_basics_select_filter_sort.sql
+--     SELECT, WHERE, IN/NOT IN, BETWEEN, IS NULL, LIKE,
+--     ORDER BY, LIMIT, DISTINCT
+--
+--  02_aggregations_group_by.sql
+--     COUNT/SUM/AVG/MIN/MAX, GROUP BY, HAVING,
+--     conditional aggregation (CASE inside SUM/COUNT),
+--     ROLLUP for subtotals
+--
+--  03_joins.sql
+--     INNER JOIN, LEFT JOIN, anti-joins (LEFT JOIN + IS NULL),
+--     FULL OUTER JOIN, SELF JOIN, join pitfalls (row multiplication)
+--
+--  04_window_functions.sql       ← #1 differentiator in interviews
+--     ROW_NUMBER, RANK, DENSE_RANK,
+--     LAG, LEAD (day-over-day changes, readmissions),
+--     Running totals, moving averages (SUM/AVG OVER),
+--     NTILE, FIRST_VALUE/LAST_VALUE, partitioned aggregates
+--
+--  05_ctes_subqueries.sql
+--     Inline subqueries, correlated subqueries,
+--     Single-step CTEs, multi-step CTE pipelines,
+--     Recursive CTEs, EXISTS vs IN
+--
+--  06_date_string_case_functions.sql
+--     DATE_DIFF, DATE_TRUNC, EXTRACT, DATE_ADD/SUB,
+--     String functions (CONCAT, UPPER/LOWER, SUBSTR, REGEXP),
+--     CASE WHEN, COALESCE, NULLIF
+--
+--  07_advanced_analytics_patterns.sql ← hardest interview questions
+--     Cohort/retention analysis, deduplication,
+--     Gap & island analysis, funnel analysis,
+--     Percentile distributions, YoY comparisons,
+--     Sessionization, PIVOT (conditional aggregation),
+--     "Top N per group" pattern
+--
+-- ── RECOMMENDED STUDY ORDER ──────────────────────────────────
+--
+--  Week 1: Modules 01–02  (foundations)
+--  Week 2: Modules 03–04  (joins + windows — most common interview topics)
+--  Week 3: Modules 05–06  (CTEs, date/string manipulation)
+--  Week 4: Module 07      (advanced patterns, mock interviews)
+--
+-- ── KEY MENTAL MODELS ────────────────────────────────────────
+--
+--  1. SQL execution order (≠ write order):
+--       FROM → JOIN → WHERE → GROUP BY → HAVING
+--       → SELECT → WINDOW FUNCTIONS → DISTINCT → ORDER BY → LIMIT
+--
+--  2. GROUP BY collapses rows; window functions don't.
+--
+--  3. Always think: "What is the grain (unit) of one output row?"
+--
+--  4. NULL propagates: NULL + anything = NULL.
+--     Use COALESCE or IFNULL to handle.
+--
+--  5. Every JOIN can multiply rows — always verify row counts.
+--
+-- ── QUICK REFERENCE: BigQuery vs PostgreSQL vs MySQL ─────────
+--
+--  Operation          BigQuery                PostgreSQL         MySQL
+--  ─────────────────────────────────────────────────────────────────
+--  Date diff          DATE_DIFF(a,b,DAY)      a - b             DATEDIFF(a,b)
+--  Truncate date      DATE_TRUNC(d, MONTH)    DATE_TRUNC('month',d) DATE_FORMAT(d,'%Y-%m-01')
+--  Extract part       EXTRACT(MONTH FROM d)   EXTRACT(month FROM d) MONTH(d)
+--  String concat      a || b  or CONCAT(a,b)  a || b            CONCAT(a,b)
+--  Regex match        REGEXP_CONTAINS(s,r)    s ~ 'pattern'     s REGEXP 'pattern'
+--  Top N rows         LIMIT N                 LIMIT N           LIMIT N
+--  Median             PERCENTILE_CONT(x,0.5)  PERCENTILE_CONT(0.5) WITHIN GROUP ...  (no native)
+--  String agg         STRING_AGG(col,',')     STRING_AGG(col,',')   GROUP_CONCAT(col)
+--  Current date       CURRENT_DATE()          CURRENT_DATE      CURDATE()
+--  Auto increment PK  (use GENERATE_UUID())   SERIAL / BIGSERIAL AUTO_INCREMENT
+--
+-- ── HOW TO USE THESE FILES ───────────────────────────────────
+--
+--  1. Read each concept section carefully.
+--  2. Try to write the practice problems yourself BEFORE looking at answers.
+--  3. After each module, write 2–3 novel queries using the healthcare data.
+--  4. Time yourself: aim for 5–10 min for basic queries, 15–20 for advanced.
+--
+-- ── INTERVIEW TIPS ───────────────────────────────────────────
+--
+--  ✓ Clarify requirements and output grain before writing anything
+--  ✓ Think out loud — interviewers care about process
+--  ✓ Start with the FROM clause, build outward
+--  ✓ Mention edge cases: NULLs, division by zero, duplicates
+--  ✓ Know how to optimize: partitions, clustering, avoiding SELECT *
+--  ✓ Be ready to explain EXECUTION ORDER vs. WRITE ORDER
+--
+-- ============================================================
